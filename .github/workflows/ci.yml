@@ -22,6 +22,11 @@ jobs:
         working-directory: ./api
         run: npm install
 
+      - name: Criar arquivo .env da API
+        working-directory: ./api
+        run: |
+          echo "DATABASE_URL=file:./dev.db" > .env
+
       - name: Rodar testes da API
         working-directory: ./api
         run: npm run test:e2e
