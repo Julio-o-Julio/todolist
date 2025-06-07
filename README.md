@@ -1,4 +1,4 @@
-# todolist-01
+# todolist
 
 Sistema de Gerenciamento de Tarefas Pessoais
 
@@ -6,11 +6,11 @@ Sistema de Gerenciamento de Tarefas Pessoais
 
 1. Abra o terminal em uma pasta de sua escolha e faça o clone do repositório rodando este código:
 
-> git clone https://github.com/Julio-o-Julio/todolist-01
+> git clone https://github.com/Julio-o-Julio/todolist
 
 2. Após clonar o repositório, entre na pasta do repositório rodando o comando ainda no seu terminal:
 
-> cd ./todolist-01
+> cd ./todolist
 
 3. Agora abra mais um terminal, um para o Backend e outro para o Frontend.
 
