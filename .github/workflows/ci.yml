@@ -26,6 +26,14 @@ jobs:
         working-directory: ./api
         run: |
           echo "DATABASE_URL=\"file:./dev.db\"" > .env
+      
+      - name: Rodar migrations
+        working-directory: ./api
+        run: npx prisma migrate --name testes
+
+      - name: Atualizar ambiente prisma
+        working-directory: ./api
+        run: npx prisma generate
 
       - name: Rodar testes da API
         working-directory: ./api
