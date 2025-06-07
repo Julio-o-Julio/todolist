@@ -131,4 +131,5 @@ dist
 
 # Prisma
 /prisma/*
+!/prisma/migrations
 !/prisma/schema.prisma

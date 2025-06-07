@@ -22,9 +22,22 @@ jobs:
         working-directory: ./api
         run: npm install
 
+      - name: Criar arquivo .env da API
+        working-directory: ./api
+        run: |
+          echo "DATABASE_URL=\"file:./dev.db\"" > .env
+      
+      - name: Rodar migrations
+        working-directory: ./api
+        run: npx prisma migrate deploy
+
+      - name: Atualizar ambiente prisma
+        working-directory: ./api
+        run: npx prisma generate
+
       - name: Rodar testes da API
         working-directory: ./api
-        run: npm test:e2e
+        run: npm run test:e2e
 
   frontend-tests:
     name: Testes Frontend (React)
@@ -42,6 +55,20 @@ jobs:
         working-directory: ./front
         run: npm install
 
-      - name: Rodar server do Frontend
+      - name: Rodar server do Frontend em background
         working-directory: ./front
-        run: npm run dev
+        run: |
+          nohup npm run dev > front.log 2>&1 &
+
+      - name: Aguardar servidor iniciar (até 10s)
+        run: |
+          for i in {1..10}; do
+            if curl --silent --head http://localhost:5173; then
+              echo "✅ Frontend no ar"
+              exit 0
+            fi
+            echo "⏳ Aguardando frontend subir..."
+            sleep 1
+          done
+          echo "❌ Frontend não respondeu com HTTP 200"
+          exit 1
